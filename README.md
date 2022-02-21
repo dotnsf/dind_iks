@@ -3,7 +3,7 @@
 
 ## How to use
 
-`$ kubectl apply -f dind.yml`
+`$ kubectl apply -f https://raw.githubusercontent.com/dotnsf/dind_iks/main/dind.yml`
 
 
 ## Licensing
