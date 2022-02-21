@@ -13,30 +13,36 @@ spec:
     nodePort: 30800
   type: NodePort
 ---
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: dind
 spec:
-  spec:
+  selector:
     matchLabels:
       app: dind
-  containers:
-    - name: docker
-      image: docker:19.03
-      command: ["docker", "run", "nginx:latest"]
-      env:
-        - name: DOCKER_HOST
-          value: tcp://localhost:2375
-    - name: dind-daemon
-      image: docker:19.03-dind
-      env:
-        - name: DOCKER_TLS_CERTDIR
-          value: ""
-      resources:
-        requests:
-          cpu: 20m
-          memory: 512Mi
-      securityContext:
-        privileged: true
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: dind
+    spec:
+      containers:
+        - name: docker
+          image: docker:19.03
+          command: ["docker", "run", "nginx:latest"]
+          env:
+            - name: DOCKER_HOST
+              value: tcp://localhost:2375
+        - name: dind-daemon
+          image: docker:19.03-dind
+          env:
+            - name: DOCKER_TLS_CERTDIR
+              value: ""
+          resources:
+            requests:
+              cpu: 20m
+              memory: 512Mi
+          securityContext:
+            privileged: true
 

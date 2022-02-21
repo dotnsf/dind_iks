@@ -1,9 +1,14 @@
 # Docker in Docker
 
 
-## How to use
+## How to use(Cluster internal use)
 
 `$ kubectl apply -f https://raw.githubusercontent.com/dotnsf/dind_iks/main/dind.yml`
+
+
+## How to use(Expose to internet)
+
+`$ kubectl apply -f https://raw.githubusercontent.com/dotnsf/dind_iks/main/dind_expose.yml`
 
 
 ## Licensing
